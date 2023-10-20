@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Amaranth&family=Comic+Neue:wght@300&family=Mukta+Malar:wght@200&family=Unna&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0 auto 0 auto;
+}
+
+.image-container {
+    position: relative;
+}
+
+.shopping-bag-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.shopping-bag-icon:hover {
+    color: rgb(196,164,132);
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.shopping-bag-icon:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.listings-container {
+    margin-top: 200px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+    }
+
+    h2{
+       font-size: 30px; 
+    }
+    h4{
+      font-size: 15px;
+    }
+    h3{
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .col-s-1 { width: 8.33%; }
+    .col-s-2 { width: 16.66%; }
+    .col-s-12 { width: 100%; }
+}
+
+@media only screen and (min-width: 768px) {
+    .col-1 { width: 8.33%; }
+    .col-2 { width: 16.66%; }
+    .col-12 { width: 100%; }
+}
+
+.listings-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.listing-item {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+    width: 250px;
+}
+
+.listing-item img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.listing-item h2 {
+    padding-top: 5px;
+    color:rgb(196,164,132);
+    font-family: 'Unna', serif;
+}
+
+.listing-item h4 {
+    font-family: 'Mukta Malar', sans-serif;
+}
+
+.price {
+    font-family: 'Comic Neue', cursive;
+    color: rgb(176, 143, 111);
+}
+
+.listing-item h3, .listing-item h4, .listing-item h5 {
+    margin: 10px 0;
+}
+
+.load-more {
+    margin: 0 auto;
+    background-color: rgb(196,164,132);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    font-family: 'Comic Neue', cursive;
+}
+
+.load-more:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}

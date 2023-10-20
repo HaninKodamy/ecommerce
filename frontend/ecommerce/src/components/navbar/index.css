@@ -1,0 +1,190 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;700&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC&family=Nanum+Myeongjo&display=swap');
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+}
+
+
+:root {
+  --mainColor: #29335c;
+  --mainColorLight: #5767aa;
+  --secondaryColor: rgb(196,164,132);
+  --textColor: rgb(53, 48, 48);
+}
+
+header {
+  background-color: whitesmoke;
+  height: 120px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000; /* Should be below modal and overlay */
+  transition: background-color 0.3s;
+}
+
+.header-content {
+  margin-top: 90px; 
+}
+
+.navComponent {
+  background-color: transparent;
+  color: var(--textColor);
+  display: flex;
+  align-items: center;
+}
+
+.nav-cart{
+  margin-top: 20px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px; /* Adding padding to header container */
+}
+
+.logo {
+  font-family: 'Cormorant SC', serif;
+  font-size: 40px;
+}
+
+.logo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 3px 20px;
+}
+
+
+.logo-header .search-component {
+  margin-right: 10px; 
+}
+
+.header-container .navComponent{
+  padding-top: 10px;
+  padding-left: 95px;
+}
+
+.navComponent a {
+  margin: 0 2.5rem;
+  color: var(--textColor);
+  text-decoration: none;
+  font-size: 20px;
+  font-family: 'Nanum Myeongjo', serif;
+  position: relative;
+}
+
+.navComponent a::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--secondaryColor);
+  transition: width 0.3s ease;
+}
+
+.navComponent a:hover::before {
+  width: 100%;
+}
+
+
+header .nav-btn {
+  display: none;
+  padding: 5px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--textColor);
+  opacity: 0;
+  font-size: 1.8rem;
+}
+
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+
+@media only screen and (max-width: 1024px) {
+   
+  .header-container {
+    padding: 0 10px;
+}
+  .nav-cart{
+    margin-right: 37px;
+    margin-top: 10px;
+  }
+	header .nav-btn {
+	  visibility: visible;
+    opacity: 1;
+    display: block;
+    position: fixed; 
+    top: 0;
+    right: 0; 
+    margin-top: 3px;
+    font-size: 30px;
+	}
+  
+	header .navComponent {
+	  position: fixed;
+	  top: -100vh;
+	  left: 0;
+	  height: 100%;
+	  width: 100%;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 1.5rem;
+	  background-color: white;
+	  transition: 1s;
+    z-index: 1000;
+	}
+  
+	header .responsive_nav {
+	  transform: translateY(100vh);
+	}
+  
+.navComponent .nav-close-btn {
+	  position: absolute;
+	  top: 2rem;
+	  right: 2rem;
+	}
+  
+	.navComponent a {
+	  font-size: 18px;
+	}
+
+  .navComponent{
+    padding-left: 0%;
+    margin-left: 0;
+  }
+  header{
+    height:60px
+  }
+   .logo-header{
+    padding: 0 10px;
+   }
+
+   .logo {
+    font-size: 20px;
+    margin-right: 0;
+}
+
+  }

@@ -1,0 +1,13 @@
+.scroll-icon {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .scroll-down-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  

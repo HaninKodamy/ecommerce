@@ -1,0 +1,93 @@
+/* Reset some default styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Center the category items */
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.category-item {
+  flex: 0 0 calc(20% - 20px);
+  padding: 10px;
+  text-align: center;
+  margin: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the images */
+.category-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 200ms ease-in-out;
+  border-radius: 10px;
+}
+
+.category-item:hover img {
+  transform: scale(1.1);
+}
+
+/* Style the category names */
+.image-link {
+  display: block;
+  position: relative;
+}
+
+.image-link h3 {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  font-size: 1.5rem;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  text-align: center;
+  z-index: 4;
+  color: white;
+  font-family: 'Bowlby One SC', cursive;
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+}
+
+.category-item:hover h3 {
+  opacity: 1;
+  width: 110%;
+}
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 768px) {
+  html {
+    font-size: 50%;
+  }
+
+  [class*="col-"] {
+    width: 100%;
+  }
+
+  .col-50 {
+    flex: 100%;
+    padding: 0;
+  }
+
+  .category-item {
+    display: flex;
+    flex: 1;
+  }
+
+  .image-link h3 {
+    font-size: 1rem;
+    opacity: 1;
+    top: 85%;
+    border-radius: 10px;
+    width: 90%;
+  }
+}

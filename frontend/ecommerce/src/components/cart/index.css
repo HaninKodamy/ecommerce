@@ -1,0 +1,26 @@
+.cart-icon{
+    font-size: 29px;
+    color: rgb(196,164,132);
+   
+}
+.cart-length{
+    margin-right: 30px;
+}
+.poweroff{
+    font-size: 20px;
+    color: black;
+    margin-bottom: 3px;
+}
+
+.loginButton{
+        color: var(--textColor);
+        text-decoration: none;
+        font-size: 20px;
+        font-family: 'Nanum Myeongjo', serif;
+}
+
+@media only screen and (max-width: 1024px) {
+    .cart-icon{
+    font-size: 23px;
+    }    
+}

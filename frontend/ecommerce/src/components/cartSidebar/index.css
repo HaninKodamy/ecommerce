@@ -1,0 +1,120 @@
+.cart-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 300px;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px; /* Adjust size as per need */
+}
+
+.cart-box {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.cart-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.detail-box {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cart-product-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.cart-price {
+  font-size: 20px;
+  color: #333;
+  /* margin-left: 15px; */
+}
+
+input[type=number] {
+  width: 40px;
+  height: 23px;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 10px; */
+}
+
+.trash-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #f00;
+}
+
+/* Style for the total price and order button */
+.cart-sidebar p {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.cart-sidebar button {
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(176, 143, 111); /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.cart-sidebar button:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid rgb(176, 143, 111);
+}
+.cart-box {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-start; /* Align top if items have different heights */
+}
+
+.item-details {
+  flex-grow: 1;  /* Allow this container to grow and take remaining horizontal space */
+  display: flex;
+  justify-content: space-between;  /* Distribute space between detail-box and trash-icon */
+  align-items: center;  /* Vertically align the items in the center */
+}
+
+.detail-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.trash-icon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #f00;
+}
+.border{
+  border-top: 1px solid #333;
+  margin-bottom: 10px;
+}
