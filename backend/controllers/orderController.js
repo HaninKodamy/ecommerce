@@ -49,6 +49,18 @@ const getAllOrders = async (req, res) => {
   }
 };
 
+const getOrdersByUser = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const orders = await Order.find({ buyer: userId }).populate('items.listing');
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+
 // Get order by ID
 const getOrderById = async (req, res) => {
   try {
@@ -139,5 +151,6 @@ module.exports = {
   getOrderById,
   updateOrderById,
   deleteOrderById,
-  approvedOrderById
+  approvedOrderById,
+  getOrdersByUser
 };

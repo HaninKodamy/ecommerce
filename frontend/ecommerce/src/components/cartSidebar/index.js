@@ -49,7 +49,8 @@ function CartSidebar({ onCheckout, onClose }) {
                 value={item.quantity} 
                 onChange={(e) => handleChangeQuantity(e, item)} 
                 onClick={(e) => e.stopPropagation()}
-                min="1"
+                min="0"
+                defaultValue={0}
                 max={item.quantityStock}
               />
             </div>

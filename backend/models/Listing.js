@@ -14,12 +14,12 @@ const listingSchema = new Schema({
   price: {
     type: Number,
     required: true,
-    min: 1,
+    min: 0,
   },
   quantityStock:{
     type: Number,
     required: true,
-    min: 1,
+    min: 0,
   },
 
   category: {

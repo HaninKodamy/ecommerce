@@ -122,7 +122,7 @@ const Orders = () => {
       <HeaderHome searchData={handleSearch} />
       <div className="content-container">
         <SidebarHome />
-        <div className="table-container">
+        <div className="table-container" style={{marginTop:'350px'}}>
           <div className="app-card app-card-orders-table mb-5">
             <div className="app-card-body">
               <div className="table-responsive">

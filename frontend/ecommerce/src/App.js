@@ -8,6 +8,7 @@ import Dashboard from "./pages/dashboard"
 import Overview from "./pages/overview";
 import Orders from "./pages/orders"
 import Listings from "./pages/listings"
+// import MyOrders from "./pages/myOrders";
 import { CartProvider } from "./components/cartContext/index";
 import { AuthContextProvider } from "./components/authContext";
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/overview" element={<Overview/>} />
             <Route path="/orders" element={<Orders/>}/>
             <Route path="/listings" element={<Listings/>}/>
+            {/* <Route path="/myOrders" element={<MyOrders/>}/> */}
           </Routes>
         </BrowserRouter>
       </CartProvider>

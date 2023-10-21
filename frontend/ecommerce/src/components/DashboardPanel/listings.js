@@ -135,19 +135,19 @@ const Listings = () => {
     const confirmDeletion = window.confirm(
       "Are you sure you want to delete this listing?"
     );
-
+  
     if (confirmDeletion) {
       axios
         .delete(`http://localhost:4000/api/listings/${listing._id}`)
         .then(() => {
-          setListings(listings.filter((l) => l._id !== listing._id));
-          getListings();
+          getListings();  // This fetches the updated list after deletion
         })
         .catch((error) => {
           console.error(error);
         });
     }
   };
+  
 
   return (
     <>

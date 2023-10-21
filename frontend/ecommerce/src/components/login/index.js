@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../authContext'; // Replace with the correct path to your AuthContext file
+import { AuthContext } from '../authContext'; 
 import './index.css';
 import BackImage from '../../assets/images/BLUBERRI.jpg';
 
@@ -39,7 +39,7 @@ const LoginPage = () => {
 
         if (data.role === 'admin') {
           console.log('Navigating to dashboard...');
-          navigate('/dashboard');
+          navigate('/overview');
         } else {
           console.log('Navigating to home...');
           navigate('/');

@@ -120,6 +120,7 @@
 
 .load-more {
     margin: 0 auto;
+    width:400px;
     background-color: rgb(196,164,132);
     border: none;
     color: white;

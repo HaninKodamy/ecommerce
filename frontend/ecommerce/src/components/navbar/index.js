@@ -45,6 +45,7 @@ function Navbar() {
         <nav ref={navRef} className="navComponent">
           <Link to="/">Home</Link>
           <Link to="/products">Products</Link>
+          {/* <Link to="/myOrders">My Orders</Link> */}
           <button
             className="nav-btn nav-close-btn"
             onClick={showNavbar}
