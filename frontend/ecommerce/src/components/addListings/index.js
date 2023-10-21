@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-
+// import './index.css';
 
 const initialListingData = {
   title: '',
   description: '',
-  price: 0,
+  price: 1,
   category: '',
-  quantityStock: 0,
+  quantityStock: 1,
   images: '',
 };
 
@@ -39,20 +39,19 @@ function AddListing({ isOpen, onRequestClose, onAddListing }) {
   };
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0]; // Get the first selected file
+    const file = e.target.files[0]; 
   
     if (file) {
       const reader = new FileReader();
   
       reader.onload = (e) => {
-        // This function is called when the file is read
-        const imageURL = e.target.result; // This is the URL of the image
+
+        const imageURL = e.target.result; 
   
-        // Now you can update the listingData.image with the imageURL
+  
         setListingData({ ...listingData, images: imageURL });
       };
   
-      // Read the file as a data URL (base64 encoded image)
       reader.readAsDataURL(file);
     }
   };
@@ -69,14 +68,12 @@ function AddListing({ isOpen, onRequestClose, onAddListing }) {
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onRequestClose={resetForm}
-      contentLabel="Add Listing Modal"
-    >
+    isOpen ? (
+    <div className='modal'>
+      <div className="modal-content">
       <h2>Add New Listing</h2>
       <form>
-        <div>
+        <div className="form-group">
           <label>Title:</label>
           <input
             type="text"
@@ -85,7 +82,7 @@ function AddListing({ isOpen, onRequestClose, onAddListing }) {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Description:</label>
           <textarea
             name="description"
@@ -93,25 +90,31 @@ function AddListing({ isOpen, onRequestClose, onAddListing }) {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Price:</label>
           <input
             type="number"
             name="price"
             value={listingData.price}
             onChange={handleChange}
+            className="priceInput"
+            min={1}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Quantity in Stock:</label>
           <input
             type="number"
             name="quantityStock"
             value={listingData.quantityStock}
             onChange={handleChange}
+            className="priceInput"
+            min={1}
+            defaultValue={1}
+            
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Category:</label>
           <select
             name="category"
@@ -126,19 +129,21 @@ function AddListing({ isOpen, onRequestClose, onAddListing }) {
             ))}
           </select>
         </div>
-        <div>
-          <label>Image:</label>
+        <div >
+          <label>Image:</label><br></br>
           <input
             type="file"
             name="images"
             accept="image/*"
             onChange={handleImageUpload}
           />
-        </div>
-        <button onClick={handleSubmit}>Add Listing</button>
-        <button onClick={resetForm}>Cancel</button>
+        </div><br></br>
+        <button onClick={handleSubmit} className="save-button" style={{marginRight:"15px"}}>Add Listing</button>
+        <button onClick={resetForm} className="cancel-button">Cancel</button>
       </form>
-    </Modal>
+   </div>
+   </div>
+    ): null
   );
 }
 

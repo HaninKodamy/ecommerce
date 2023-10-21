@@ -1,4 +1,4 @@
-.order-modal {
+.order-modal{
     position: fixed;
     top: 50%;
     left: 50%; /* This should be 50% to ensure the modal is horizontally centered */

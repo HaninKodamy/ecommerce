@@ -9,8 +9,9 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [viewedOrder, setViewedOrder] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredListings, setFilteredListings] = useState([]);
 
-  // State and functions for the edit modal
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editedOrder, setEditedOrder] = useState({});
   const [editedOrderIndex, setEditedOrderIndex] = useState(null);
@@ -20,6 +21,7 @@ const Orders = () => {
       .get("http://localhost:4000/api/orders")
       .then((response) => {
         setOrders(response.data);
+        setFilteredListings(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -32,11 +34,10 @@ const Orders = () => {
   };
 
   const handleEdit = (order, index) => {
-    setEditedOrder(order);  // Keep the buyer as the ObjectId
+    setEditedOrder(order); // Keep the buyer as the ObjectId
     setEditedOrderIndex(index);
     setEditModalOpen(true);
-};
-
+  };
 
   const handleUpdateOrder = () => {
     // Make an axios PUT request to update the order
@@ -47,6 +48,7 @@ const Orders = () => {
         const updatedOrders = [...orders];
         updatedOrders[editedOrderIndex] = response.data;
         setOrders(updatedOrders);
+        setFilteredListings(updatedOrders);
 
         setEditModalOpen(false);
       })
@@ -72,9 +74,52 @@ const Orders = () => {
     }
   };
 
+  const handleSearch = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+    if (term) {
+      const filtered = orders.filter((order) => {
+        const buyerMatch = order.buyer.username
+          .toLowerCase()
+          .includes(term.toLowerCase());
+        const shippingAddress = order.shippingAddress
+          .toLowerCase()
+          .includes(term.toLowerCase());
+        const totalPrice = order.totalPrice.toString() === term;
+
+        return buyerMatch || shippingAddress || totalPrice;
+      });
+      setFilteredListings(filtered);
+    } else setFilteredListings(orders);
+  };
+
+  const handleApprovalToggle = (order, index) => {
+   if(order.adminApprovalStatus!=="approved"){
+    const updatedStatus =
+    order.adminApprovalStatus === "approved" ? "pending" : "approved";
+
+  const updatedOrder = { ...order, adminApprovalStatus: updatedStatus };
+
+ 
+  axios
+    .put(`http://localhost:4000/api/orders/approved/${updatedOrder._id}`, updatedOrder)
+    .then((response) => {
+      
+      const updatedOrders = [...orders];
+      updatedOrders[index]["adminApprovalStatus"] = "approved";
+      setOrders(updatedOrders);
+      setFilteredListings(updatedOrders);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+   }
+    
+  };
+
   return (
     <div className="orders-container">
-      <HeaderHome />
+      <HeaderHome searchData={handleSearch} />
       <div className="content-container">
         <SidebarHome />
         <div className="table-container">
@@ -92,25 +137,49 @@ const Orders = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {orders.map((order, index) => (
-                      <tr key={order._id}>
-                        <td>#{order._id}</td>
-                        <td>{order.buyer.username}</td>
-                        <td>{order.shippingAddress}</td>
-                        <td>${order.totalPrice}</td>
-                        <td>
-                          <button onClick={() => handleDelete(order)} className="order-button">
-                            Delete
-                          </button>
-                          <button onClick={() => handleView(order)} className="order-button">
-                            View
-                          </button>
-                          <button onClick={() => handleEdit(order, index)} className="order-button">
-                            Edit
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                    {filteredListings && filteredListings.length > 0 ? (
+                      <>
+                        {filteredListings.map((order, index) => (
+                          <tr key={order._id}>
+                            <td>#{order._id}</td>
+                            <td>{order.buyer.username}</td>
+                            <td>{order.shippingAddress}</td>
+                            <td>${order.totalPrice}</td>
+                            <td>
+                              <input
+                                type="checkbox"
+                                checked={
+                                  order.adminApprovalStatus === "approved"
+                                }
+                                onChange={() =>
+                                  handleApprovalToggle(order, index)
+                                }
+                              />
+                              {order.adminApprovalStatus}
+                            </td>
+
+                            <td>
+                              {/* <button onClick={() => handleDelete(order)} className="order-button">
+                                Delete
+                              </button> */}
+                              <button
+                                onClick={() => handleView(order)}
+                                className="order-button"
+                              >
+                                View
+                              </button>
+                              {/* <button onClick={() => handleEdit(order, index)} className="order-button">
+                                Edit
+                              </button> */}
+                            </td>
+                          </tr>
+                        ))}
+                      </>
+                    ) : (
+                      <div class="center-div">
+                        <div class="loader"></div>
+                      </div>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -121,7 +190,7 @@ const Orders = () => {
       {viewModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <h1 style={{textDecoration:'underline'}}>Order Details</h1>
+            <h1 style={{ textDecoration: "underline" }}>Order Details</h1>
             <p>
               <strong>Order ID:</strong> {viewedOrder._id}
             </p>
@@ -132,14 +201,18 @@ const Orders = () => {
               <strong>Shipping Address:</strong> {viewedOrder.shippingAddress}
             </p>
             <br></br>
-            <h2 style={{textDecoration:'underline'}}>Order Items</h2>
+            <h2 style={{ textDecoration: "underline" }}>Order Items</h2>
             <ul>
               {viewedOrder.items.map((item) => (
                 <li key={item.listing._id} className="order-item">
                   <div className="order-item-image-container">
                     <img
-                      src={item.listing.images[0]} // Replace with your image URL
-                      alt={item.listing.title}
+                      src={
+                        item.listing &&
+                        item.listing.images &&
+                        item.listing.images[0]
+                      }
+                      alt={item.listing ? item.listing.title : "No Title"}
                       className="order-item-image"
                     />
                   </div>

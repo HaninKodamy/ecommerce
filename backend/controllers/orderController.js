@@ -1,5 +1,6 @@
 const Order = require('../models/Order'); // Adjust the import path as needed
 const User = require('../models/User');
+const Listing = require('../models/Listing');
 
 // Create a new order
 const createOrder = async (req, res) => {
@@ -82,6 +83,42 @@ const updateOrderById = async (req, res) => {
   }
 };
 
+const approvedOrderById = async (req, res) => {
+  try {
+    console.log('Order ID:', req.params.orderId);
+    console.log('Update Data:', req.body);
+
+    const items = req.body.items;
+    console.log("items", items);
+
+    for (const item of items) {
+      console.log("item", item);
+      const getItem = await Listing.findById(item.listing._id);
+      console.log(getItem);
+      const qtyStock = getItem.quantityStock;
+      const qtyClient = item.quantity;
+      const newQtyStock = parseInt(qtyStock) - parseInt(qtyClient);
+      console.log(newQtyStock);
+      console.log(qtyClient);
+      console.log(qtyStock);
+      await Listing.findByIdAndUpdate(item.listing._id, { quantityStock: newQtyStock });
+    }
+
+
+    const updatedOrder = await Order.findByIdAndUpdate(req.params.orderId, req.body, {
+      new: true
+    });
+    
+    if (!updatedOrder) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    res.status(200).json(updatedOrder);
+  } catch (error) {
+    console.error('Update Error:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 
 // Delete order by ID
 const deleteOrderById = async (req, res) => {
@@ -101,5 +138,6 @@ module.exports = {
   getAllOrders,
   getOrderById,
   updateOrderById,
-  deleteOrderById
+  deleteOrderById,
+  approvedOrderById
 };

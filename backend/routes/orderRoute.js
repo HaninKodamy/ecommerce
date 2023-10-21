@@ -14,6 +14,8 @@ router.get('/orders/:orderId', orderController.getOrderById);
 // Update order by ID
 router.put('/orders/:orderId', orderController.updateOrderById);
 
+router.put('/orders/approved/:orderId', orderController.approvedOrderById);
+
 // Delete order by ID
 router.delete('/orders/:orderId', orderController.deleteOrderById);
 

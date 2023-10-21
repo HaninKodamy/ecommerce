@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
+// import CreditCardUi from '../CreditCardUi/index'
 
 function OrderModal({user, cart = [], onClose, emptyCart, openOrderDone }) {
 
@@ -107,6 +108,8 @@ function OrderModal({user, cart = [], onClose, emptyCart, openOrderDone }) {
             Total: ${getTotalPrice()}
           </h1>
         </div>
+        {/* <CreditCardUi/> */}
+         <strong>*At the moment, we only offer cash on delivery as a payment option.</strong>
         <button type="submit" className="btn btn-primary">
           Submit Order
         </button>

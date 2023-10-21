@@ -8,6 +8,9 @@ router.post('/listings', listingController.createListing);
 // Get listings by category
 router.get('/listings/category/:category', listingController.getListingsByCategory);
 
+// search listing
+router.get('/listings/search/:searchText', listingController.searchListing);
+
 // Get all listings
 router.get('/listings', listingController.getAllListings);
 

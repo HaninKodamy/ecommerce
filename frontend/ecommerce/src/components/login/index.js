@@ -56,7 +56,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="container mt-5" style={{ backgroundImage: `url(${BackImage})` }}>
+    <div className="container mt-5" style={{ 
+      backgroundImage: `url(${BackImage})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center'
+  }}>
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card1">

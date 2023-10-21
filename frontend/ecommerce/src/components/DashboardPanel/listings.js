@@ -1,23 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import EditListingModal from '../editListingsModal/index';
-import AddListing from '../addListings/index';
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import EditListingModal from "../editListingsModal/index";
+import AddListing from "../addListings/index";
+import HeaderHome from "./header";
+import SidebarHome from "./sidebar";
+import "./index.css";
 
 const ViewModal = ({ viewModalOpen, viewedListing, setViewModalOpen }) => {
   return (
-    <div className={`modal ${viewModalOpen ? 'open' : ''}`}>
-      <div className="modal-content">
-        <h2>View Listing</h2>
-        <p>Title: {viewedListing.title}</p>
-        <p>Description: {viewedListing.description}</p>
-        <p>Price: ${viewedListing.price}</p>
-        <img
-          src={viewedListing.images}
-          alt={viewedListing.title}
-          style={{ maxWidth: '200px' }}
-        />{' '}
-        <button onClick={() => setViewModalOpen(false)}>Close</button>
+    <div className="modal">
+      <div className={`${viewModalOpen ? "open" : ""}`} style={{width:'750px'}}>
+        <div className="modal-content">
+          <div className="order-item-details">
+            <h1 style={{ textDecoration: "underline" }}>Order Details</h1>
+            <p>
+              <strong>Title: </strong>
+              {viewedListing.title}
+            </p>
+            <p>
+              <strong>Description: </strong>
+              {viewedListing.description}
+            </p>
+            <p>
+              <strong>Price: </strong>${viewedListing.price}
+            </p>
+            <div className="order-item-image-container" style={{ float: 'left' }}>
+              <img
+                src={viewedListing.images}
+                alt={viewedListing.title}
+                className="order-item-image"
+                
+              />{" "}
+            </div>
+          </div><br></br><br></br><br></br>
+          <button
+            onClick={() => setViewModalOpen(false)}
+            className="order-button"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -31,11 +53,12 @@ const Listings = () => {
   const [editedListing, setEditedListing] = useState({});
   const [editedListingIndex, setEditedListingIndex] = useState(null);
   const [filteredListings, setFilteredListings] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [addModalOpen, setAddModalOpen] = useState(false); // State for the "Add Listing" modal
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/listings')
+    axios
+      .get("http://localhost:4000/api/listings")
       .then((response) => {
         setListings(response.data);
       })
@@ -45,7 +68,12 @@ const Listings = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/listings')
+    getListings();
+  }, []);
+
+  const getListings = () => {
+    axios
+      .get("http://localhost:4000/api/listings")
       .then((response) => {
         setListings(response.data);
         setFilteredListings(response.data);
@@ -53,21 +81,24 @@ const Listings = () => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  };
 
   const handleSearch = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
-  
+
     const filtered = listings.filter((listing) => {
-      const titleMatch = listing.title.toLowerCase().includes(term.toLowerCase());
-      const descriptionMatch = listing.description.toLowerCase().includes(term.toLowerCase());
+      const titleMatch = listing.title
+        .toLowerCase()
+        .includes(term.toLowerCase());
+      const descriptionMatch = listing.description
+        .toLowerCase()
+        .includes(term.toLowerCase());
       return titleMatch || descriptionMatch;
     });
-  
+
     setFilteredListings(filtered);
   };
-  
 
   const handleView = (listing) => {
     setViewedListing(listing);
@@ -81,15 +112,19 @@ const Listings = () => {
   };
 
   const handleUpdateListing = () => {
-    // Make an axios PUT request to update the listing
-    axios.put(`http://localhost:4000/api/listings/${editedListing._id}`, editedListing)
+    
+    axios
+      .put(
+        `http://localhost:4000/api/listings/${editedListing._id}`,
+        editedListing
+      )
       .then((response) => {
-        // Update the local state with the updated listing data
+       console.log(response);
         const updatedListings = [...listings];
         updatedListings[editedListingIndex] = response.data;
         setListings(updatedListings);
 
-        setEditModalOpen(false); // Close the edit modal
+        setEditModalOpen(false); 
       })
       .catch((error) => {
         console.error(error);
@@ -97,12 +132,16 @@ const Listings = () => {
   };
 
   const handleDelete = (listing) => {
-    const confirmDeletion = window.confirm('Are you sure you want to delete this listing?');
+    const confirmDeletion = window.confirm(
+      "Are you sure you want to delete this listing?"
+    );
 
     if (confirmDeletion) {
-      axios.delete(`http://localhost:4000/api/listings/${listing._id}`)
+      axios
+        .delete(`http://localhost:4000/api/listings/${listing._id}`)
         .then(() => {
           setListings(listings.filter((l) => l._id !== listing._id));
+          getListings();
         })
         .catch((error) => {
           console.error(error);
@@ -111,82 +150,127 @@ const Listings = () => {
   };
 
   return (
-    <div>
-      <h1>Listings</h1>
-      <input
-        type="text"
-        placeholder="Search"
-        value={searchTerm}
-        onChange={handleSearch}
-      />
+    <>
+      <div className="orders-container">
+        <HeaderHome searchData={handleSearch} />
+        <div className="content-container" style={{ height: "130vh" }}>
+          <SidebarHome />
+          <div className="table-container">
+            <div className="app-card app-card-orders-table mb-5">
+              <div className="app-card-body">
+                <button
+                  onClick={() => setAddModalOpen(true)}
+                  className="order-button"
+                  style={{ float: "right", backgroundColor: "grey" }}
+                >
+                  Add Listing
+                </button>
+                <div className="table-responsive">
+                  <table className="table mb-0 text-left custom-table">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Images</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredListings && filteredListings.length > 0 ? (
+                        <>
+                          {filteredListings.map((listing, index) => (
+                            <tr key={listing._id}>
+                              <td>{listing.title}</td>
+                              <td>{listing.description}</td>
+                              <td>${listing.price}</td>
+                              <td>
+                                <img
+                                  src={listing.images}
+                                  alt={listing.title}
+                                  style={{
+                                    display: "block",
+                                    margin: "0 auto",
+                                    maxWidth: "50px",
+                                  }}
+                                />
+                              </td>
+                              <td>
+                                <button
+                                  onClick={() => handleDelete(listing)}
+                                  className="order-button"
+                                >
+                                  Delete
+                                </button>
+                                <button
+                                  onClick={() => handleView(listing)}
+                                  className="order-button"
+                                >
+                                  View
+                                </button>
+                                <button
+                                  onClick={() => handleEdit(listing, index)}
+                                  className="order-button"
+                                >
+                                  Edit
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </>
+                      ) : (
+                        <div className="center-div">
+                          <div class="loader"></div>
+                        </div>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          ;
+        </div>
+        {viewModalOpen && (
+          <ViewModal
+            viewModalOpen={viewModalOpen}
+            viewedListing={viewedListing}
+            setViewModalOpen={setViewModalOpen}
+          />
+        )}
+        {editModalOpen && (
+          <EditListingModal
+            editModalOpen={editModalOpen}
+            editedListing={editedListing}
+            setEditedListing={setEditedListing}
+            handleUpdateListing={handleUpdateListing}
+            setEditModalOpen={setEditModalOpen}
+          />
+        )}
 
-      <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-        <thead>
-          <tr>
-            <th style={{ border: '1px solid #000', padding: '8px' }}>Title</th>
-            <th style={{ border: '1px solid #000', padding: '8px' }}>Description</th>
-            <th style={{ border: '1px solid #000', padding: '8px' }}>Price</th>
-            <th style={{ border: '1px solid #000', padding: '8px' }}>Images</th>
-            <th style={{ border: '1px solid #000', padding: '8px' }}>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredListings.map((listing, index) => (
-            <tr key={listing._id}>
-              <td style={{ border: '1px solid #000', padding: '8px' }}>{listing.title}</td>
-              <td style={{ border: '1px solid #000', padding: '8px' }}>{listing.description}</td>
-              <td style={{ border: '1px solid #000', padding: '8px' }}>${listing.price}</td>
-              <td style={{ border: '1px solid #000', padding: '8px' }}>
-                <img src={listing.images} alt={listing.title} style={{ display: 'block', margin: '0 auto', maxWidth: '50px' }} />
-              </td>
-              <td style={{ border: '1px solid #000', padding: '8px' }}>
-                <button onClick={() => handleDelete(listing)}>Delete</button>
-                <button onClick={() => handleView(listing)}>View</button>
-                <button onClick={() => handleEdit(listing, index)}>Edit</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <button onClick={() => setAddModalOpen(true)}>Add Listing</button>
-
-      {viewModalOpen && (
-        <ViewModal
-          viewModalOpen={viewModalOpen}
-          viewedListing={viewedListing}
-          setViewModalOpen={setViewModalOpen}
-        />
-      )}
-      {editModalOpen && ( // Conditionally render the edit modal
-        <EditListingModal
-          editModalOpen={editModalOpen}
-          editedListing={editedListing}
-          setEditedListing={setEditedListing}
-          handleUpdateListing={handleUpdateListing}
-          setEditModalOpen={setEditModalOpen}
-        />
-      )}
-
-      {addModalOpen && (
-        <AddListing
-          isOpen={addModalOpen}
-          onRequestClose={() => setAddModalOpen(false)}
-          onAddListing={(newListingData) => {
-            // Handle adding a new listing here
-            axios.post('http://localhost:4000/api/listings', newListingData)
-              .then((response) => {
-                // Add the new listing to the local state
-                setFilteredListings([...listings, response.data]);
-                setAddModalOpen(false); // Close the "Add Listing" modal
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          }}
-        />
-      )}
-    </div>
+        {addModalOpen && (
+          <AddListing
+            isOpen={addModalOpen}
+            onRequestClose={() => setAddModalOpen(false)}
+            onAddListing={(newListingData) => {
+              console.log("newListingData", newListingData);
+              // Handle adding a new listing here
+              axios
+                .post("http://localhost:4000/api/listings", newListingData)
+                .then((response) => {
+                  console.log("response", response);
+                  // Add the new listing to the local state
+                  setFilteredListings([...listings, response.data]);
+                  setAddModalOpen(false); // Close the "Add Listing" modal
+                })
+                .catch((error) => {
+                  console.error(error);
+                });
+            }}
+          />
+        )}
+      </div>
+    </>
   );
 };
 

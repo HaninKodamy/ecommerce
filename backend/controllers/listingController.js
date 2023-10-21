@@ -70,6 +70,16 @@ exports.getListingsByCategory = async (req, res) => {
   }
 };
 
+exports.searchListing = async (req, res) => {
+  try {
+    const searchText = req.params.searchText; // Note this change
+    const listing = await Listing.find({ title: searchText });
+    res.status(200).json(listing);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 exports.getListingById = async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.listingId);
@@ -87,10 +97,12 @@ exports.getListingById = async (req, res) => {
 // Controller to update a listing by ID
 exports.updateListingById = async (req, res) => {
   try {
+    console.log(req.body);
+    console.log(req.params.listingId);
     const updatedListing = await Listing.findByIdAndUpdate(
       req.params.listingId,
       req.body,
-      { new: true, runValidators: true }
+      { new: true }
     );
 
     if (!updatedListing) {

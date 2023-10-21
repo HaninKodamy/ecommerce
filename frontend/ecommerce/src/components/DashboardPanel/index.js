@@ -4,18 +4,17 @@ import { useContext } from 'react'
 import Overview from './overview';
 
 function DashboardPanel() {
-  const { user, role, loading  } = useContext(AuthContext);
+  const { user, role, loading } = useContext(AuthContext);
   const [access, setAccess] = useState(false);
-  
+
   useEffect(() => {
-    console.log("ff")
     if (!loading) {
       // If user data is available, check access
-      if (user) {
+      if (user && role === 'admin') {
         setAccess(true);
       }
     }
-  }, [user, loading]);
+  }, [user, loading, role]);
 
   return (
     <>

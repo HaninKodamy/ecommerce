@@ -14,12 +14,12 @@ const listingSchema = new Schema({
   price: {
     type: Number,
     required: true,
-    min: 0,
+    min: 1,
   },
   quantityStock:{
     type: Number,
     required: true,
-    min: 0,
+    min: 1,
   },
 
   category: {
@@ -27,15 +27,15 @@ const listingSchema = new Schema({
     ref: "Category",
     required: true,
   },
-  seller: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    // required: true,
-  },
-  location: {
-    type: String,
-    // required: true,
-  },
+  // seller: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User",
+  //   // required: true,
+  // },
+  // location: {
+  //   type: String,
+  //   // required: true,
+  // },
   images: [
     {
       type: String, // Assuming image URLs as strings
@@ -46,16 +46,16 @@ const listingSchema = new Schema({
     default: Date.now,
   },
 
-  adminApprovalStatus: {
-    type: String,
-    enum: ["pending", "approved", "denied"],
-    default: "pending",
-  },
+  // adminApprovalStatus: {
+  //   type: String,
+  //   enum: ["pending", "approved", "denied"],
+  //   default: "pending",
+  // },
   
-  adminApprover: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Admin",
-  },
+  // adminApprover: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Admin",
+  // },
 });
 
 const Listing=model("Listing",listingSchema);

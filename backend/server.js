@@ -12,8 +12,7 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.static('public')); // Replace 'public' with the actual directory where your images are located
-app.use(express.json());
-
+app.use(express.json({limit: '50mb'}));
 // Define your routes
 app.use('/api', userRouter); // Include your user route (and other routes) here
 app.use('/api', categoryRouter);
