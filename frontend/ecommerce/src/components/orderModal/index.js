@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
-// import CreditCardUi from '../CreditCardUi/index'
 
 function OrderModal({user, cart = [], onClose, emptyCart, openOrderDone }) {
 
@@ -15,7 +14,6 @@ function OrderModal({user, cart = [], onClose, emptyCart, openOrderDone }) {
 
   const handleSubmitOrder = async (event) => {
     event.preventDefault();
-    // Add logic to handle order submission
     console.log("carttttt", cart);
     let totalPrice = 0;
     const items = cart.map((item, index)=>{

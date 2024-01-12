@@ -3,7 +3,7 @@ import { useCart } from '../cartContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import CartSidebar from '../cartSidebar/index';
-import OrderModal from '../orderModal'; // Ensure the path is correct
+import OrderModal from '../orderModal';
 import './index.css';
 import { Link } from "react-router-dom";
 import { AuthContext } from '../authContext';

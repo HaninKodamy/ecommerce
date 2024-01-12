@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./index.css"; // Include the CSS file
+import "./index.css";
 import EditModal from "../editModal/index";
 import HeaderHome from "./header";
 import SidebarHome from "./sidebar";
@@ -34,17 +34,15 @@ const Orders = () => {
   };
 
   const handleEdit = (order, index) => {
-    setEditedOrder(order); // Keep the buyer as the ObjectId
+    setEditedOrder(order);
     setEditedOrderIndex(index);
     setEditModalOpen(true);
   };
 
   const handleUpdateOrder = () => {
-    // Make an axios PUT request to update the order
     axios
       .put(`http://localhost:4000/api/orders/${editedOrder._id}`, editedOrder)
       .then((response) => {
-        // Update the local state with the updated order data
         const updatedOrders = [...orders];
         updatedOrders[editedOrderIndex] = response.data;
         setOrders(updatedOrders);

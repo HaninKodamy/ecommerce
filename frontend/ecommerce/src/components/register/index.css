@@ -16,7 +16,7 @@ width: 500px;
   height: 650px;
   padding: 20px;
   border: 1px solid #ddd;
-  background-color: #fff; /* Card background color */
+  background-color: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   margin-top: 70px;
   margin-bottom: 70px;
@@ -26,7 +26,7 @@ width: 500px;
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
-  color: #333; /* Header text color */
+  color: #333;
 }
 
 .form-group {
@@ -35,7 +35,7 @@ width: 500px;
 
 label {
   font-weight: bold;
-  color: #555; /* Label text color */
+  color: #555; 
 }
 
 .form-control {
@@ -44,13 +44,13 @@ label {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  color: #333; /* Input text color */
+  color: #333; 
 }
 
 .btn-primary {
   width: 100%;
   padding: 10px;
-  background-color: rgb(196,164,132); /* Primary button color */
+  background-color: rgb(196,164,132);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -59,14 +59,14 @@ label {
 }
 
 .btn-primary:hover {
-  background-color: rgb(196,164,132); /* Hover color for the button */
+  background-color: rgb(196,164,132); 
 }
 .error-message {
 color: red;
 font-size: 10px;
 }
 
-/* Add styles to highlight input with an error */
+
 input.error {
 border: 1px solid red;
 }

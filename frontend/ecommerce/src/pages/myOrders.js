@@ -21,11 +21,11 @@ function MyOrders() {
       <h2>Your Orders</h2>
       {orders.map(order => (
         <div key={order._id}>
-          {/* Display order details here */}
-          {/* For instance: */}
+          {}
+          {}
           <p>Order ID: {order._id}</p>
           <p>Total Price: ${order.totalPrice}</p>
-          {/* And so on... */}
+          {}
         </div>
       ))}
     </div>

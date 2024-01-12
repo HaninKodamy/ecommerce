@@ -14,7 +14,6 @@ function Navbar() {
     );
   };
 
-  // Add a scroll event listener to toggle the sticky header
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 0);
@@ -28,7 +27,6 @@ function Navbar() {
   }, []);
 
   const handleSearch = (query) => {
-    // Implement your search logic here, e.g., fetching data based on the query
     console.log(`Searching for: ${query}`);
   };
 

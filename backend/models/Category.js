@@ -8,7 +8,7 @@ const categorySchema = new Schema({
   },
   images: [
     {
-      type: String, // Assuming image URLs as strings
+      type: String, 
     },
   ],
 });

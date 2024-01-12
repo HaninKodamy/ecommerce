@@ -28,8 +28,7 @@ const userSchema = new Schema({
     type: String,
     validate: {
       validator: function (v) {
-        // Custom validation for phone number format (you can customize this)
-        return /^\d{8}$/.test(v); // Assumes an 8-digit phone number
+        return /^\d{8}$/.test(v); 
       },
       message: "Phone number must be a valid 8-digit number.",
     },

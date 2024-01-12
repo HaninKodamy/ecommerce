@@ -6,8 +6,8 @@
   
   .scroll-down-container {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    margin-top: 20px; /* Adjust margin as needed */
+    justify-content: center;
+    align-items: center; 
+    margin-top: 20px;
   }
   

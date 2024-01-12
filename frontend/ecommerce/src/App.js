@@ -8,7 +8,6 @@ import Dashboard from "./pages/dashboard"
 import Overview from "./pages/overview";
 import Orders from "./pages/orders"
 import Listings from "./pages/listings"
-// import MyOrders from "./pages/myOrders";
 import { CartProvider } from "./components/cartContext/index";
 import { AuthContextProvider } from "./components/authContext";
 

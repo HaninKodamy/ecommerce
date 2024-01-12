@@ -1,4 +1,4 @@
-const Report = require('../models/Report'); // Adjust the import path as needed
+const Report = require('../models/Report');
 
 // Create a new report
 exports.createReport = async (req, res) => {

@@ -54,7 +54,7 @@ const Listings = () => {
   const [editedListingIndex, setEditedListingIndex] = useState(null);
   const [filteredListings, setFilteredListings] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [addModalOpen, setAddModalOpen] = useState(false); // State for the "Add Listing" modal
+  const [addModalOpen, setAddModalOpen] = useState(false); 
 
   useEffect(() => {
     axios
@@ -108,7 +108,7 @@ const Listings = () => {
   const handleEdit = (listing, index) => {
     setEditedListing({ ...listing });
     setEditedListingIndex(index);
-    setEditModalOpen(true); // Open the edit modal
+    setEditModalOpen(true);
   };
 
   const handleUpdateListing = () => {
@@ -140,7 +140,7 @@ const Listings = () => {
       axios
         .delete(`http://localhost:4000/api/listings/${listing._id}`)
         .then(() => {
-          getListings();  // This fetches the updated list after deletion
+          getListings();
         })
         .catch((error) => {
           console.error(error);
@@ -254,14 +254,12 @@ const Listings = () => {
             onRequestClose={() => setAddModalOpen(false)}
             onAddListing={(newListingData) => {
               console.log("newListingData", newListingData);
-              // Handle adding a new listing here
               axios
                 .post("http://localhost:4000/api/listings", newListingData)
                 .then((response) => {
                   console.log("response", response);
-                  // Add the new listing to the local state
                   setFilteredListings([...listings, response.data]);
-                  setAddModalOpen(false); // Close the "Add Listing" modal
+                  setAddModalOpen(false);
                 })
                 .catch((error) => {
                   console.error(error);

@@ -11,13 +11,10 @@ function Search({ onSearch }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Pass the search term to the parent component for handling the search
     onSearch(searchTerm);
   };
 
   const handleIconClick = () => {
-    // Handle the click event here
-    // You can perform a search action or other functionality
     onSearch(searchTerm);
   };
 

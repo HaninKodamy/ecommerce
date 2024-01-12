@@ -9,7 +9,6 @@ import './home.css';
 export default function Home() {
   const [showOverview, setShowOverview] = useState(false);
 
-  // Function to toggle the visibility of the overview component
   const toggleOverview = () => {
     setShowOverview(!showOverview);
   };
@@ -20,7 +19,7 @@ export default function Home() {
       <Categories />
 
       <div className="scroll-down-container">
-        {/* Scroll to down icon */}
+        {}
         <img
           src={scrollIcon}
           alt="Scroll down"

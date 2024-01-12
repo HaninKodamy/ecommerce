@@ -27,18 +27,10 @@ const listingSchema = new Schema({
     ref: "Category",
     required: true,
   },
-  // seller: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  //   // required: true,
-  // },
-  // location: {
-  //   type: String,
-  //   // required: true,
-  // },
+ 
   images: [
     {
-      type: String, // Assuming image URLs as strings
+      type: String,
     },
   ],
   datePosted: {
@@ -46,16 +38,6 @@ const listingSchema = new Schema({
     default: Date.now,
   },
 
-  // adminApprovalStatus: {
-  //   type: String,
-  //   enum: ["pending", "approved", "denied"],
-  //   default: "pending",
-  // },
-  
-  // adminApprover: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Admin",
-  // },
 });
 
 const Listing=model("Listing",listingSchema);

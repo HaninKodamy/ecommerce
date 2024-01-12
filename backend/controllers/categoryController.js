@@ -34,7 +34,7 @@ exports.updateCategory = async (req, res) => {
     const updatedCategory = await Category.findByIdAndUpdate(
       categoryId,
       { name, images },
-      { new: true } // To return the updated category
+      { new: true } 
     );
     if (updatedCategory) {
       res.status(200).json(updatedCategory);

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-// import './index.css';
 
 const initialListingData = {
   title: '',

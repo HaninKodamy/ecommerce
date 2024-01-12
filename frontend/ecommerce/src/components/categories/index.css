@@ -1,11 +1,9 @@
-/* Reset some default styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Center the category items */
 .category-list {
   display: flex;
   flex-wrap: wrap;
@@ -23,7 +21,6 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Style the images */
 .category-item img {
   width: 100%;
   height: 100%;
@@ -36,7 +33,6 @@
   transform: scale(1.1);
 }
 
-/* Style the category names */
 .image-link {
   display: block;
   position: relative;
@@ -63,7 +59,6 @@
   width: 110%;
 }
 
-/* Responsive styles for smaller screens */
 @media only screen and (max-width: 768px) {
   html {
     font-size: 50%;

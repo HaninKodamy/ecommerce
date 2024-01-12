@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema, model } = mongoose;
-const Listing = require('../models/Listing'); // Import the Listing model
-const Category = require('../models/Category'); // Import the Category model
+const Listing = require('../models/Listing');
+const Category = require('../models/Category');
 
 // Controller to create a new listing
 exports.createListing = async (req, res) => {
@@ -17,14 +17,12 @@ exports.createListing = async (req, res) => {
       quantityStock, 
     } = req.body;
 
-    // Use the provided category ID directly
     const categoryObj = await Category.findById(category);
 
     if (!categoryObj) {
       return res.status(404).json({ error: 'Category not found' });
     }
 
-    // Create the new listing using the provided category's ID
     const newListing = new Listing({
       title,
       description,
@@ -33,7 +31,7 @@ exports.createListing = async (req, res) => {
       seller,
       location,
       images,
-      quantityStock, // Include quantityStock in the new listing
+      quantityStock, 
     });
 
     await newListing.save();
@@ -56,7 +54,7 @@ exports.getAllListings = async (req, res) => {
 
 exports.getListingsByCategory = async (req, res) => {
   try {
-    const categoryName = req.params.category; // Note this change
+    const categoryName = req.params.category; 
     // First, find the category object by name
     const categoryObj = await Category.findOne({ name: categoryName });
     if (!categoryObj) {
@@ -72,7 +70,7 @@ exports.getListingsByCategory = async (req, res) => {
 
 exports.searchListing = async (req, res) => {
   try {
-    const searchText = req.params.searchText; // Note this change
+    const searchText = req.params.searchText;
     const listing = await Listing.find({ title: searchText });
     res.status(200).json(listing);
   } catch (error) {

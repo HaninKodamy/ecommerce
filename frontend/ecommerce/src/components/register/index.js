@@ -30,7 +30,6 @@ function Registration() {
       [name]: value,
     });
 
-    // Clear the error message and individual error for this field
     setErrorMessage("");
     setValidationErrors({
       ...validationErrors,
@@ -40,8 +39,6 @@ function Registration() {
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
-
-    // Clear the error message and individual error for confirm password
     setErrorMessage("");
     setValidationErrors({
       ...validationErrors,
@@ -75,7 +72,6 @@ function Registration() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate email and password before submission
     const emailErrors = validateEmail();
     const passwordErrors = validatePassword();
 

@@ -1,4 +1,4 @@
-const Order = require('../models/Order'); // Adjust the import path as needed
+const Order = require('../models/Order');
 const User = require('../models/User');
 const Listing = require('../models/Listing');
 
@@ -33,11 +33,11 @@ const getAllOrders = async (req, res) => {
       .populate([
         {
           path: 'buyer',
-          model: User, // Use the User model
-          select: 'username', // Select the 'username' field
+          model: User, 
+          select: 'username', 
         },
         {
-          path: 'items.listing', // Populate the items.listing field
+          path: 'items.listing', 
         },
       ])
       .exec();

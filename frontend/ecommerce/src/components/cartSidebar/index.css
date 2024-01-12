@@ -17,7 +17,7 @@
   top: 10px;
   right: 10px;
   cursor: pointer;
-  font-size: 24px; /* Adjust size as per need */
+  font-size: 24px; 
 }
 
 .cart-box {
@@ -54,7 +54,6 @@ input[type=number] {
   height: 23px;
   align-items: center;
   justify-content: center;
-  /* margin-top: 10px; */
 }
 
 .trash-icon {
@@ -63,7 +62,6 @@ input[type=number] {
   color: #f00;
 }
 
-/* Style for the total price and order button */
 .cart-sidebar p {
   margin-top: 20px;
   font-size: 18px;
@@ -73,7 +71,7 @@ input[type=number] {
 .cart-sidebar button {
   width: 100%;
   padding: 10px;
-  background-color: rgb(176, 143, 111); /* Green */
+  background-color: rgb(176, 143, 111);
   border: none;
   color: white;
   text-align: center;
@@ -92,14 +90,14 @@ input[type=number] {
 .cart-box {
   display: flex;
   margin-bottom: 20px;
-  align-items: flex-start; /* Align top if items have different heights */
+  align-items: flex-start;
 }
 
 .item-details {
-  flex-grow: 1;  /* Allow this container to grow and take remaining horizontal space */
+  flex-grow: 1;
   display: flex;
-  justify-content: space-between;  /* Distribute space between detail-box and trash-icon */
-  align-items: center;  /* Vertically align the items in the center */
+  justify-content: space-between; 
+  align-items: center; 
 }
 
 .detail-box {

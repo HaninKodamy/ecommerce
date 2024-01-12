@@ -7,7 +7,6 @@ function Footer() {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        // Make a GET request to fetch categories
         axios.get('http://localhost:4000/api/categories')
             .then((response) => {
                 setCategories(response.data);

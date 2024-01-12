@@ -1,6 +1,5 @@
 const express = require('express');
 const {loginUser,registerUser,getAllUsers,checkIfAdmin,getUserById,updateUserById,deleteUserById} = require('../controllers/userController');
-// import {registerUser,getAllUsers,checkIfAdmin,getUserById,updateUserById,deleteUserById} from '../controllers/userController'
 const router = express.Router();
 // Create a new user
 router.post('/users', registerUser);
